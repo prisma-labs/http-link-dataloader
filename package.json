@@ -1,6 +1,6 @@
 {
-  "name": "graphql-request",
-  "version": "1.4.0",
+  "name": "batched-graphql-request",
+  "version": "0.2.0",
   "main": "dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
   "files": [
@@ -8,7 +8,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/graphcool/graphql-request.git"
+    "url": "git+https://github.com/graphcool/batched-graphql-request.git"
   },
   "keywords": [
     "graphql",
@@ -17,12 +17,12 @@
     "graphql-client",
     "apollo"
   ],
-  "author": "Johannes Schickling <johannes@graph.cool>",
+  "author": "Tim Suchanek <tim.suchanek@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/graphcool/graphql-request/issues"
+    "url": "https://github.com/graphcool/batched-graphql-request/issues"
   },
-  "homepage": "https://github.com/graphcool/graphql-request",
+  "homepage": "https://github.com/graphcool/batched-graphql-request",
   "scripts": {
     "prepublish": "npm run build",
     "build": "rm -rf dist && tsc -d",
@@ -39,6 +39,7 @@
     "typescript": "^2.4.2"
   },
   "dependencies": {
-    "cross-fetch": "1.1.1"
+    "cross-fetch": "1.1.1",
+    "dataloader": "^1.3.0"
   }
 }

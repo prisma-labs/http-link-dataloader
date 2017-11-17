@@ -1,6 +1,6 @@
 {
   "name": "batched-graphql-request",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
   "files": [

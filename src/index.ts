@@ -5,8 +5,8 @@ import * as DataLoader from 'dataloader'
 export { ClientError } from './types'
 
 export class BatchedGraphQLClient {
-  private url: string
-  private options: Options
+  public url: string
+  public options: Options
   private dataloader: DataLoader<string, any>
 
   constructor (url: string, options?: Options) {

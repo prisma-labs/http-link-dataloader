@@ -18,10 +18,12 @@ export class BatchedGraphQLClient {
   async request<T extends any> (
     query: string,
     variables?: Variables,
+    operationName?: string,
   ): Promise<T> {
     const body = JSON.stringify({
       query,
       variables: variables ? variables : undefined,
+      operationName: operationName ? operationName : undefined
     })
     return this.dataloader.load(body)
   }

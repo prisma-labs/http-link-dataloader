@@ -2,6 +2,8 @@ import { ClientError, Options, Variables } from './types'
 import 'cross-fetch/polyfill'
 import * as DataLoader from 'dataloader'
 
+export { ClientError } from './types'
+
 export class BatchedGraphQLClient {
   private url: string
   private options: Options

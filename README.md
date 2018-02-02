@@ -103,7 +103,7 @@ A batching that would even be faster is alias-based batching. Instead of creatin
 }
 ```
 
-This requires a lot more logic and resolution logic for aliases, but would be a lot faster than the array based batching!
+This requires a lot more logic and resolution magic for aliases, but would be a lot faster than the array based batching as our tests have shown!
 Anyone intersted in working on this is more than welcome to do so!
 You can either create an issue or just reach out to us in slack and join our #contributors channel.
 

@@ -1,4 +1,4 @@
 export * from './types'
 
-export { BatchedHttpLink } from './BatchedHTTPLink'
+export { HTTPLinkDataloader } from './HTTPLinkDataloader'
 export { BatchedGraphQLClient } from './BatchedGraphQLClient'

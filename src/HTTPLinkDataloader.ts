@@ -3,9 +3,9 @@ import { print } from 'graphql'
 import { BatchedGraphQLClient } from './index'
 import { Options, HttpOptions } from './types'
 
-export class BatchedHttpLink extends ApolloLink {
+export class HTTPLinkDataloader extends ApolloLink {
   constructor(options: HttpOptions) {
-    super(BatchedHttpLink.createBatchedHttpRequest(options))
+    super(HTTPLinkDataloader.createBatchedHttpRequest(options))
   }
 
   private static createBatchedHttpRequest(options: HttpOptions) {

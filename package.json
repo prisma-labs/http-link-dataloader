@@ -1,6 +1,6 @@
 {
   "name": "http-link-dataloader",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
   "files": ["dist"],

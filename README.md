@@ -1,5 +1,9 @@
 # http-link-dataloader
 
+📚📡 HTTP Apollo Link with batching & caching provided by dataloader.
+
+## Idea
+
 A Apollo Link that batches requests both in Node and the Browser.
 You may ask what's the difference to [apollo-link-batch-http](https://github.com/apollographql/apollo-link/tree/master/packages/apollo-link-batch-http).
 Instead of having a time-frame/fixed cache size based batching approach like in `apollo-link-batch-http`, this library uses [dataloader](https://github.com/facebook/dataloader) for batching requests. It is a more generic approach just depending on the Node.JS event loop that batches all consecutive queries directly.

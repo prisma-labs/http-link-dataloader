@@ -12,9 +12,13 @@ export interface Options {
   integrity?: RequestInit['integrity']
 }
 
+export type HttpOptions = Options & {
+  uri: string
+}
+
 export interface GraphQLError {
   message: string
-  locations: { line: number, column: number }[]
+  locations: { line: number; column: number }[]
   path: string[]
 }
 
@@ -31,12 +35,14 @@ export interface GraphQLRequestContext {
 }
 
 export class ClientError extends Error {
-
   response: GraphQLResponse
   request: GraphQLRequestContext
 
-  constructor (response: GraphQLResponse, request: GraphQLRequestContext) {
-    const message = `${ClientError.extractMessage(response)}: ${JSON.stringify({ response, request })}`
+  constructor(response: GraphQLResponse, request: GraphQLRequestContext) {
+    const message = `${ClientError.extractMessage(response)}: ${JSON.stringify({
+      response,
+      request,
+    })}`
 
     super(message)
 
@@ -50,7 +56,7 @@ export class ClientError extends Error {
     }
   }
 
-  private static extractMessage (response: GraphQLResponse): string {
+  private static extractMessage(response: GraphQLResponse): string {
     try {
       return response.errors![0].message
     } catch (e) {

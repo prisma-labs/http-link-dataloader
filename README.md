@@ -1,81 +1,107 @@
-# batched-graphql-request [![Build Status](https://travis-ci.org/graphcool/batched-graphql-request.svg?branch=master)](https://travis-ci.org/graphcool/graphql-request) [![npm version](https://badge.fury.io/js/graphql-request.svg)](https://badge.fury.io/js/graphql-request) [![Greenkeeper badge](https://badges.greenkeeper.io/graphcool/graphql-request.svg)](https://greenkeeper.io/)
+# http-link-dataloader
 
-📚📡  Node-only, batched version of the graphql-request library 
-
-## Features
-
-* Most **simple and lightweight** GraphQL client
-* Includes batching and caching based [`dataloader`](https://github.com/facebook/dataloader)
-* Promise-based API (works with `async` / `await`)
-* Typescript support (Flow coming soon)
-
-## Idea
-The idea of this library is to provide query batching and caching for Node.js backends on a per-request basis.
-That means, per http request to your Node.js backend, you create a new instance of `BatchedGraphQLClient` which has its
-own cache and batching. Sharing a `BatchedGraphQLClient` instance across requests against your webserver is not recommended as that would result
-in Memory Leaks with the Cache growing infinitely. The batching and caching is based on [`dataloader`](https://github.com/facebook/dataloader)
-
-## Install
-
-```sh
-npm install batched-graphql-request
-```
+A Apollo Link that batches requests both in Node and the Browser.
+You may ask what's the difference to [apollo-link-batch-http](https://github.com/apollographql/apollo-link/tree/master/packages/apollo-link-batch-http).
+Instead of having a time-frame/fixed cache size based batching approach like in `apollo-link-batch-http`, this library uses [dataloader](https://github.com/facebook/dataloader) for batching requests. It is a more generic approach just depending on the Node.JS event loop that batches all consecutive queries directly.
+The main use-case for this library is the usage from a [`graphql-yoga`](https://github.com/graphcool/graphql-yoga) server using [`prisma-binding`](https://github.com/graphcool/prisma-binding), but it can be used in any environment, even the browser as the latest `dataloader` version also runs in browser environments.
 
 ## Usage
-The basic usage is exactly the same as you're used to with [`graphql-request`](https://github.com/graphcool/graphql-request)
-```js
-import { BatchedGraphQLClient } from 'batched-graphql-request'
 
-const client = new BatchedGraphQLClient(endpoint, { headers: {} })
-client.request(query, variables).then(data => console.log(data)) 
+```ts
+import { BatchedHTTPLink } from 'http-link-dataloader'
+
+const link = new BatchedHTTPLink()
+
+const token = 'Auth Token'
+
+const httpLink = new BatchedHttpLink({
+  uri: `api endpoint`,
+  headers: { Authorization: `Bearer ${token}` },
+})
 ```
 
-## Examples
+## Caching behavior
 
-### Creating a new Client per request
-In this example, we proxy requests that come in the form of [batched array](https://blog.graph.cool/improving-performance-with-apollo-query-batching-66455ea9d8bc).
-Instead of sending each request individually to `my-endpoint`, all requests are again batched together and send grouped to
-the underlying endpoint, which increases the performance dramatically.
-```js
-import { BatchedGraphQLClient } from 'batched-graphql-request'
-import * as express from 'express'
-import * as bodyParser from 'body-parser'
+Note that the dataloader cache aggressively caches everything! That means if you don't want to cache anymore, just create a new instance of `BatchedHTTPLink`.
+A good fit for this is every incoming HTTP request in a server environment - on each new HTTP request a new `BatchedHTTPLink` instance is created.
 
-const app = express()
+## Batching
 
-/*
-This accepts POST requests to /graphql of this form:
-[
-  {query: "...", variables: {}},
-  {query: "...", variables: {}},
-  {query: "...", variables: {}}
-]
- */
+This library uses array-based batching. Querying 2 queries like this creates the following payload:
 
-app.use(
-  '/graphql',
-  bodyParser.json(),
-  async (req, res) => {
-    const client = new BatchedGraphQLClient('my-endpoint', {
-      headers: {
-        Authorization: 'Bearer my-jwt-token',
-      },
-    })
-    
-    const requests = Array.isArray(req.body) ? req.body : [req.body]
-    
-    const results = await Promise.all(requests.map(({query, variables}) => client.request(query, variables)))
-    
-    res.json(results)
+```graphql
+query {
+  Item(id: "1") {
+    id
+    name
+    text
   }
-)
-
-app.listen(3000, () =>
-  console.log('Server running.'),
-)
+}
 ```
 
-To learn more about the usage, please check out [graphql-request](https://github.com/graphcool/graphql-request)
+```graphql
+query {
+  Item(id: "2") {
+    id
+    name
+    text
+  }
+}
+```
+
+Instead of sending 2 separate http requests, it gets combined into one:
+
+```js
+;[
+  {
+    query: `query {
+      Item(id: "1") {
+        id
+        name
+        text
+      }
+    }`,
+  },
+  {
+    query: `query {
+      Item(id: "2") {
+        id
+        name
+        text
+      }
+    }`,
+  },
+]
+```
+
+**Note that the GraphQL Server needs to support the array-based batching!**
+(Prisma supports this out of the box)
+
+## Even better batching
+
+A batching that would even be faster is alias-based batching. Instead of creating the array described above, it would generate something like this:
+
+```js
+  {
+    query: `
+    query {
+      item_1: Item(id: "1") {
+        id
+        name
+        text
+      }
+      item_2: Item(id: "2") {
+        id
+        name
+        text
+      }
+    }`
+  },
+```
+
+This requires a lot more logic and resolution logic for aliases, but would be a lot faster than the array based batching!
+Anyone intersted in working on this is more than welcome to do so!
+You can either create an issue or just reach out to us in slack and join our #contributors channel.
 
 ## Help & Community [![Slack Status](https://slack.graph.cool/badge.svg)](https://slack.graph.cool)
 

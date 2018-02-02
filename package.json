@@ -1,28 +1,20 @@
 {
-  "name": "batched-graphql-request",
-  "version": "0.4.1",
+  "name": "http-link-dataloader",
+  "version": "0.0.0",
   "main": "dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/graphcool/batched-graphql-request.git"
+    "url": "git+https://github.com/graphcool/http-link-dataloader.git"
   },
-  "keywords": [
-    "graphql",
-    "request",
-    "fetch",
-    "graphql-client",
-    "apollo"
-  ],
+  "keywords": ["graphql", "request", "fetch", "graphql-client", "apollo"],
   "author": "Tim Suchanek <tim.suchanek@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/graphcool/batched-graphql-request/issues"
+    "url": "https://github.com/graphcool/http-link-dataloader/issues"
   },
-  "homepage": "https://github.com/graphcool/batched-graphql-request",
+  "homepage": "https://github.com/graphcool/http-link-dataloader",
   "scripts": {
     "prepublish": "npm run build",
     "build": "rm -rf dist && tsc -d",
@@ -39,6 +31,7 @@
     "typescript": "^2.7.1"
   },
   "dependencies": {
+    "apollo-link": "^1.0.7",
     "cross-fetch": "1.1.1",
     "dataloader": "^1.4.0"
   }

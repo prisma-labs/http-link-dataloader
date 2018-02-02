@@ -86,8 +86,8 @@ Instead of sending 2 separate http requests, it gets combined into one:
 A batching that would even be faster is alias-based batching. Instead of creating the array described above, it would generate something like this:
 
 ```js
-  {
-    query: `
+{
+  query: `
     query {
       item_1: Item(id: "1") {
         id
@@ -100,7 +100,7 @@ A batching that would even be faster is alias-based batching. Instead of creatin
         text
       }
     }`
-  },
+}
 ```
 
 This requires a lot more logic and resolution logic for aliases, but would be a lot faster than the array based batching!

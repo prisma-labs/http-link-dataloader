@@ -3,12 +3,20 @@
   "version": "0.1.0",
   "main": "dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/graphcool/http-link-dataloader.git"
   },
-  "keywords": ["graphql", "request", "fetch", "graphql-client", "apollo"],
+  "keywords": [
+    "graphql",
+    "request",
+    "fetch",
+    "graphql-client",
+    "apollo"
+  ],
   "author": "Tim Suchanek <tim.suchanek@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -27,6 +35,7 @@
     "ava": "^0.25.0",
     "fetch-mock": "^6.0.0",
     "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.7.0",
     "tslint-config-standard": "^7.0.0",
     "typescript": "^2.7.1"
   },

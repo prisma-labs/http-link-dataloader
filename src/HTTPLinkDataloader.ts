@@ -1,7 +1,7 @@
 import { ApolloLink, Observable, Operation } from 'apollo-link'
 import { print } from 'graphql'
 import { BatchedGraphQLClient } from './index'
-import { Options, HttpOptions } from './types'
+import { HttpOptions } from './types'
 
 export class HTTPLinkDataloader extends ApolloLink {
   constructor(options: HttpOptions) {

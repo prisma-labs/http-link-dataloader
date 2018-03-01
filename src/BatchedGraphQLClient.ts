@@ -1,7 +1,4 @@
-import {
-  Options,
-  Variables,
-} from './types'
+import { Options, Variables } from './types'
 import 'cross-fetch/polyfill'
 import * as DataLoader from 'dataloader'
 import { ClientError } from './ClientError'
@@ -14,7 +11,7 @@ export class BatchedGraphQLClient {
   constructor(uri: string, options?: Options) {
     this.uri = uri
     this.options = options || {}
-    this.dataloader = new DataLoader(this.load)
+    this.dataloader = new DataLoader(this.load, { cache: false })
   }
 
   async request<T extends any>(

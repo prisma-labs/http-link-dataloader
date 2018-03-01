@@ -13,7 +13,7 @@ export interface Options {
 }
 
 export type HttpOptions = Options & {
-  uri: string,
+  uri: string
 }
 
 export interface GraphQLError {

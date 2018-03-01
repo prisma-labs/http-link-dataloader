@@ -33,3 +33,7 @@ export interface GraphQLRequestContext {
   query: string
   variables?: Variables
 }
+
+export interface ClientOptions {
+  cacheResults?: boolean
+}

@@ -69,7 +69,8 @@ export class BatchedGraphQLClient {
       }
     } else {
       // if it is not an array, there must be an error
-      throw new ClientError({ ...results, status: response.status })
+      const error = results && results.error ? (response.status + ", Error : " + results.error) : response.status;
+      throw new ClientError({ ...results, status: error })
     }
   }
 }

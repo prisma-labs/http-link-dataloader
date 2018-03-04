@@ -1,6 +1,6 @@
 {
   "name": "http-link-dataloader",
-  "version": "0.1.2",
+  "version": "0.0.0-semantic-release",
   "main": "dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
   "files": [
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/graphcool/http-link-dataloader",
   "scripts": {
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "build": "rm -rf dist && tsc -d",
     "lint": "tslint --type-check --project tsconfig.json {src,test}/**/*.ts",
     "test": "npm run lint && npm run build && ava --serial"

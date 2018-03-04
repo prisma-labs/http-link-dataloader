@@ -1,4 +1,6 @@
-# http-link-dataloader [![npm version](https://badge.fury.io/js/http-link-dataloader.svg)](https://badge.fury.io/js/http-link-dataloader)
+# http-link-dataloader
+
+[![CircleCI](https://circleci.com/gh/graphcool/http-link-loader.svg?style=shield)](https://circleci.com/gh/graphcool/http-link-loader) [![npm version](https://badge.fury.io/js/http-link-dataloader.svg)](https://badge.fury.io/js/http-link-dataloader)
 
 📚📡 HTTP Apollo Link with batching & caching provided by dataloader.
 

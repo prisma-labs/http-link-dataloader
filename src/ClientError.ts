@@ -2,7 +2,6 @@ import { GraphQLResponse, GraphQLRequestContext } from './types'
 
 export class ClientError extends Error {
   result: GraphQLResponse
-  request: GraphQLRequestContext
 
   constructor(result: GraphQLResponse) {
     const message = ClientError.extractMessage(result)
@@ -22,7 +21,7 @@ export class ClientError extends Error {
     try {
       return response.errors![0].message
     } catch (e) {
-      return `GraphQL Error (Code: ${response.status})`
+      return `GraphQL Error: ${JSON.stringify(response, null, 2)}`
     }
   }
 }

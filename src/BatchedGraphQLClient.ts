@@ -54,23 +54,27 @@ export class BatchedGraphQLClient {
 
     const results = await getResults(response)
 
-    if (Array.isArray(results)) {
-      const allResultsHaveData =
-        results.filter(r => r.data).length === results.length
-
-      if (response.ok && !results.find(r => r.errors) && allResultsHaveData) {
-        return results.map(r => r.data)
-      } else {
-        const errorIndex = results.findIndex(r => r.errors)
-        const result = results[errorIndex]
-        const errorResult =
-          typeof result === 'string' ? { error: result } : result
-        throw new ClientError({ ...errorResult, status: response.status })
-      }
-    } else {
-      // if it is not an array, there must be an error
+    // if it is not an array, there must be an error
+    if (!Array.isArray(results)) {
       throw new ClientError({ ...results, status: response.status })
     }
+
+    // check if there was an error in one of the responses
+    if (
+      !response.ok ||
+      results.some(r => r.errors !== undefined || r.data === undefined)
+    ) {
+      const errorIndex = results.findIndex(
+        r => r.errors !== undefined || r.data === undefined,
+      )
+      const result = results[errorIndex]
+      const errorResult =
+        typeof result === 'string' ? { errors: [{ message: result }] } : result
+
+      throw new ClientError({ ...errorResult, status: response.status })
+    }
+
+    return results.map(r => r.data)
   }
 }
 

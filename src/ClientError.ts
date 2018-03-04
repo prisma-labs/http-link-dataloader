@@ -1,4 +1,4 @@
-import { GraphQLResponse, GraphQLRequestContext } from './types'
+import { GraphQLResponse } from './types'
 
 export class ClientError extends Error {
   result: GraphQLResponse

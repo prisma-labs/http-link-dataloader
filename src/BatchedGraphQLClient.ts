@@ -1,5 +1,5 @@
 import { Options, Variables } from './types'
-import 'cross-fetch/polyfill'
+import 'whatwg-fetch'
 import * as DataLoader from 'dataloader'
 import { ClientError } from './ClientError'
 import { ClientOptions } from '.'

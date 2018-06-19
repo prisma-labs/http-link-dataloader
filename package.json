@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "apollo-link": "^1.2.1",
-    "cross-fetch": "2.0.0",
-    "dataloader": "^1.4.0"
+    "dataloader": "^1.4.0",
+    "whatwg-fetch": "^2.0.4"
   }
 }

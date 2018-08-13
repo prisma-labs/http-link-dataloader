@@ -14,13 +14,13 @@ The main use-case for this library is the usage from a [`graphql-yoga`](https://
 ## Usage
 
 ```ts
-import { BatchedHTTPLink } from 'http-link-dataloader'
+import { HTTPLinkDataloader } from 'http-link-dataloader'
 
-const link = new BatchedHTTPLink()
+const link = new HTTPLinkDataloader()
 
 const token = 'Auth Token'
 
-const httpLink = new BatchedHttpLink({
+const httpLink = new HTTPLinkDataloader({
   uri: `api endpoint`,
   headers: { Authorization: `Bearer ${token}` },
 })

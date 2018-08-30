@@ -10,6 +10,7 @@ export interface Options {
   referrer?: RequestInit['referrer']
   referrerPolicy?: RequestInit['referrerPolicy']
   integrity?: RequestInit['integrity']
+  keepalive?: boolean
 }
 
 export type HttpOptions = Options & {

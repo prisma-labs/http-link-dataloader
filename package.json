@@ -6,7 +6,10 @@
   "files": [
     "dist"
   ],
-  "repository": "git@github.com:prisma/http-link-dataloader.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graphcool/http-link-dataloader.git"
+  },
   "keywords": [
     "graphql",
     "request",

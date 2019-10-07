@@ -20,9 +20,18 @@ export class BatchedGraphQLClient {
     if (options && typeof options.cacheResults !== 'undefined') {
       delete options.cacheResults
     }
+    
+    const maxBatchSize =
+      options && typeof options.maxBatchSize !== 'undefined'
+        ? options.maxBatchSize
+        : null
+
+    if (options && typeof options.maxBatchSize !== 'undefined') {
+      delete options.maxBatchSize
+    }
 
     this.options = options || {}
-    this.dataloader = new DataLoader(this.load, { cache })
+    this.dataloader = new DataLoader(this.load, { cache, maxBatchSize })
   }
 
   async request<T extends any>(

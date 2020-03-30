@@ -38,6 +38,9 @@
     "typescript": "^2.7.2",
     "semantic-release": "^15.5.2"
   },
+  "peerDependencies": {
+    "graphql": "^0.13.1 || ^14.0.0"
+  },
   "dependencies": {
     "apollo-link": "^1.2.3",
     "cross-fetch": "2.2.2",

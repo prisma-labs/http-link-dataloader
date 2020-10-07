@@ -109,8 +109,8 @@ This requires a lot more logic and resolution magic for aliases, but would be a 
 Anyone intersted in working on this is more than welcome to do so!
 You can either create an issue or just reach out to us in slack and join our #contributors channel.
 
-## Help & Community [![Slack Status](https://slack.graph.cool/badge.svg)](https://slack.graph.cool)
+## Help & Community [![Slack Status](https://slack.prisma.io/badge.svg)](https://slack.prisma.io)
 
-Join our [Slack community](http://slack.graph.cool/) if you run into issues or have questions. We love talking to you!
+Join our [Slack community](http://slack.prisma.io) if you run into issues or have questions. We love talking to you!
 
 ![](http://i.imgur.com/5RHR6Ku.png)

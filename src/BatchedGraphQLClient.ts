@@ -65,7 +65,19 @@ export class BatchedGraphQLClient {
 
     // if it is not an array, there must be an error
     if (!Array.isArray(results)) {
-      throw new ClientError({ ...results, status: response.status })
+      let errorDetails;
+
+      if (typeof results === "string") {
+        errorDetails = {
+          errors: [{ message: `Invalid response: ${results}` }]
+        }
+      } else {
+        errorDetails = results;
+      }
+      throw new ClientError({
+        ...errorDetails,
+        status: response.status
+      })
     }
 
     // check if there was an error in one of the responses
